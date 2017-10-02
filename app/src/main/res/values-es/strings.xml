@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MultiQuiz</string>
+    <string name="question">Pregunta</string>
+    <string name="question_conten">Cual es la capital del Vallés Occidental?</string>
+    <string name="check">Comprueba</string>
+    <string name="correct">Perfecto!</string>
+    <string name="incorrect">Sigue estudiando...</string>
+</resources>

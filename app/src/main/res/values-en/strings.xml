@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MultiQuiz</string>
+    <string name="question">Question</string>
+    <string name="question_conten">What is the capital of Valles Occidental?</string>
+    <string name="check">Check</string>
+    <string name="correct">Perfect!</string>
+    <string name="incorrect">keep studying...</string>
+</resources>
