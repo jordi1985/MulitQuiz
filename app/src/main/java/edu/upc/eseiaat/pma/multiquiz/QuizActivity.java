@@ -21,6 +21,10 @@ public class QuizActivity extends AppCompatActivity {
     private String[] all_questions;
     private TextView text_question;
     private RadioGroup group;
+    private boolean [] answer_is_correct;
+    private Button btn_check,btn_back;
+    private int[]answers;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,53 +35,99 @@ public class QuizActivity extends AppCompatActivity {
         group = (RadioGroup) findViewById(R.id.answers_group);
 
         all_questions = getResources().getStringArray(R.array.all_questions);
+        answer_is_correct = new boolean[all_questions.length];
+        answers= new int [all_questions.length];
+
+        for(int i=0;i<answers.length;i++){
+        answers[i]=-1;}
+
         current_question = 0;
         showQuestion();
+    }
 
-        //TODO: al clicar al botó s'ha de anar a la seguent pregunta
+    public void butoCheckClicked(View view) {
+        int id = group.getCheckedRadioButtonId();
+        int answer = -1;
+        for (int i = 0; i < id_answers.length; i++) {
+            if (id_answers[i] == id) {
+                answer = i;
+            }
+        }
 
-       Button btn_check = (Button) findViewById(R.id.btn_check);
-       btn_check.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               int id = group.getCheckedRadioButtonId();
-               int answer = -1;
-               for (int i = 0; i < id_answers.length; i++) {
-                   if (id_answers[i] == id) {
-                       answer = i;
-                   }
-               }
+        answer_is_correct[current_question] = (answer == correct_answer);
 
-               if (answer == correct_answer) {
-                   Toast.makeText(QuizActivity.this, R.string.correct, Toast.LENGTH_SHORT).show();
-               } else {
-                   Toast.makeText(QuizActivity.this, R.string.incorrect, Toast.LENGTH_SHORT).show();
-               }
+        Button b = (Button)view;
+        Button d =(Button)view;
 
-               current_question++;
-               showQuestion();
-           }
-           });
+        if(b.getId()==R.id.btn_Next && current_question < all_questions.length-1)
+        {
+            current_question++;
+            showQuestion();
+        }
 
+        else {
+            if (d.getId()==R.id.btn_back && current_question > 0) {
+                current_question--;
+                showQuestion();
+            }
 
-        //TODO: poder anar enrera
+            if(current_question==all_questions.length-1 )
+            {
+                int correctas=0, incorrectas=0;
+                for (boolean c : answer_is_correct)
+                {
+                    if (c) correctas++;
+                    else incorrectas++;
+                }
+                String resultado = String.format("OK: %d ---- K.O: %d",correctas,incorrectas);
+                Toast.makeText(QuizActivity.this, resultado, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+
     }
 
     private void showQuestion() {
 
-        String q= all_questions [current_question];
-        String[] parts =  q.split(";");
+        group.clearCheck();
+        String q = all_questions[current_question];
+        String[] parts = q.split(";");
 
         text_question.setText(parts[0]);
 
-        for(int i = 0; i< id_answers.length; i++){
+
+        for (int i = 0; i < id_answers.length; i++) {
             RadioButton rb = (RadioButton) findViewById(id_answers[i]);
-            String answer = parts[i+1];
-            if (answer.charAt(0)=='*'){
-                correct_answer =  i;
+            String answer = parts[i + 1];
+            if (answer.charAt(0) == '*') {
+                correct_answer = i;
                 answer = answer.substring(1);
             }
             rb.setText(answer);
+//            if (answers[current_question] == i) {
+//                rb.isChecked(true);
+//            }
+
+            btn_check = (Button) findViewById(R.id.btn_Next);
+            btn_back = (Button) findViewById(R.id.btn_back);
+
+            if (current_question == 0)
+            {
+                btn_back.setVisibility(View.GONE);
+            }
+            else
+            {
+                btn_back.setVisibility(View.VISIBLE);
+            }
+
+            if(current_question == all_questions.length-1)
+            {
+                btn_check.setText(R.string.finish);
+            }
+            else{
+                btn_check.setText(R.string.next);
+            }
         }
+
     }
 }

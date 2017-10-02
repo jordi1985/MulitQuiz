@@ -2,8 +2,19 @@
 <resources>
     <string name="app_name">MultiQuiz</string>
     <string name="question">Pregunta</string>
-    <string name="question_conten">Quina és la capital del Vallès Occidental?</string>
     <string name="check">Comprova</string>
     <string name="correct">Perfecte!</string>
     <string name="incorrect">Segueix estudiant...</string>
+    <string name="next">Següent</string>
+    <string name="finish">Acavar</string>
+    <string name="back">Enrere</string>
+
+    <array  name = "all_questions">
+
+        <item>Quina és la capital del Vallès Occidental?;Terrassa;Sabadell;Sant Cugat;*Sabadell &amp; Terrassa </item>
+        <item>Quina és la muntanya mes alta de Catalunya?;Puigmal;*Pica d estats;Tossa d Alp;La Mola</item>
+        <item>Quina ciutat no pertany al Vallès Occidental;Granollers;Sant Quirze del Vallès;Sabadell; Terrassa</item>
+
+    </array>
+
 </resources>
