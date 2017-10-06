@@ -55,6 +55,7 @@ public class QuizActivity extends AppCompatActivity {
         }
 
         answer_is_correct[current_question] = (answer == correct_answer);
+        answers[current_question]=answer;
 
         Button b = (Button)view;
         Button d =(Button)view;
@@ -71,7 +72,7 @@ public class QuizActivity extends AppCompatActivity {
                 showQuestion();
             }
 
-            if(current_question==all_questions.length-1 )
+            else if(current_question==all_questions.length-1 )
             {
                 int correctas=0, incorrectas=0;
                 for (boolean c : answer_is_correct)
@@ -80,7 +81,7 @@ public class QuizActivity extends AppCompatActivity {
                     else incorrectas++;
                 }
                 String resultado = String.format("OK: %d ---- K.O: %d",correctas,incorrectas);
-                Toast.makeText(QuizActivity.this, resultado, Toast.LENGTH_SHORT).show();
+                Toast.makeText(QuizActivity.this, resultado, Toast.LENGTH_LONG).show();
                 finish();
             }
         }
@@ -104,9 +105,10 @@ public class QuizActivity extends AppCompatActivity {
                 answer = answer.substring(1);
             }
             rb.setText(answer);
-//            if (answers[current_question] == i) {
-//                rb.isChecked(true);
-//            }
+
+            if (answers[current_question] == i) {
+                rb.setChecked(true);
+            }
 
             btn_check = (Button) findViewById(R.id.btn_Next);
             btn_back = (Button) findViewById(R.id.btn_back);
